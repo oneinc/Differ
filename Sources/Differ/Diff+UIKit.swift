@@ -394,6 +394,7 @@
             T.Iterator.Element.Iterator.Element: Equatable {
             apply(
                 oldData.nestedExtendedDiff(to: newData),
+                store: {},
                 indexPathTransform: indexPathTransform,
                 sectionTransform: sectionTransform,
                 completion: completion
@@ -424,6 +425,7 @@
                     to: newData,
                     isEqualElement: isEqualElement
                 ),
+                store: {},
                 indexPathTransform: indexPathTransform,
                 sectionTransform: sectionTransform,
                 completion: completion
@@ -454,6 +456,7 @@
                     to: newData,
                     isEqualSection: isEqualSection
                 ),
+                store: {},
                 indexPathTransform: indexPathTransform,
                 sectionTransform: sectionTransform,
                 completion: completion
@@ -486,6 +489,7 @@
                     isEqualSection: isEqualSection,
                     isEqualElement: isEqualElement
                 ),
+                store: {},
                 indexPathTransform: indexPathTransform,
                 sectionTransform: sectionTransform,
                 completion: completion
@@ -494,19 +498,35 @@
 
         public func apply(
             _ diff: NestedExtendedDiff,
+            store: @escaping () -> (),
             indexPathTransform: @escaping (IndexPath) -> IndexPath = { $0 },
             sectionTransform: @escaping (Int) -> Int = { $0 },
             completion: ((Bool) -> Void)? = nil
         ) {
             performBatchUpdates({
+                store()
                 let update = NestedBatchUpdate(diff: diff, indexPathTransform: indexPathTransform, sectionTransform: sectionTransform)
-                self.insertSections(update.sectionInsertions)
-                self.deleteSections(update.sectionDeletions)
-                update.sectionMoves.forEach { self.moveSection($0.from, toSection: $0.to) }
-                self.deleteItems(at: update.itemDeletions)
-                self.insertItems(at: update.itemInsertions)
-                update.itemMoves.forEach { self.moveItem(at: $0.from, to: $0.to) }
-            }, completion: completion)
+                if update.sectionInsertions.count > 0 {
+                    self.insertSections(update.sectionInsertions)
+                }
+                if update.sectionDeletions.count > 0 {
+                    self.deleteSections(update.sectionDeletions)
+                }
+                if update.sectionMoves.count > 0 {
+                    update.sectionMoves.forEach { self.moveSection($0.from, toSection: $0.to) }
+                }
+                if update.itemDeletions.count > 0 {
+                    self.deleteItems(at: update.itemDeletions)
+                }
+                if update.itemInsertions.count > 0 {
+                    self.insertItems(at: update.itemInsertions)
+                }
+                if update.itemMoves.count > 0 {
+                    update.itemMoves.forEach { self.moveItem(at: $0.from, to: $0.to) }
+                }
+            }, completion: { finished in
+                completion?(finished)
+            })
         }
     }
 
