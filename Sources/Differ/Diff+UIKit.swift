@@ -95,8 +95,8 @@
         public func animateRowChanges<T: Collection>(
             oldData: T,
             newData: T,
-            deletionAnimation: UITableViewRowAnimation = .automatic,
-            insertionAnimation: UITableViewRowAnimation = .automatic,
+            deletionAnimation: UITableView.RowAnimation = .automatic,
+            insertionAnimation: UITableView.RowAnimation = .automatic,
             indexPathTransform: (IndexPath) -> IndexPath = { $0 }
         ) where T.Iterator.Element: Equatable {
             apply(
@@ -120,8 +120,8 @@
             oldData: T,
             newData: T,
             isEqual: EqualityChecker<T>,
-            deletionAnimation: UITableViewRowAnimation = .automatic,
-            insertionAnimation: UITableViewRowAnimation = .automatic,
+            deletionAnimation: UITableView.RowAnimation = .automatic,
+            insertionAnimation: UITableView.RowAnimation = .automatic,
             indexPathTransform: (IndexPath) -> IndexPath = { $0 }
         ) {
             apply(
@@ -134,8 +134,8 @@
 
         public func apply(
             _ diff: ExtendedDiff,
-            deletionAnimation: UITableViewRowAnimation = .automatic,
-            insertionAnimation: UITableViewRowAnimation = .automatic,
+            deletionAnimation: UITableView.RowAnimation = .automatic,
+            insertionAnimation: UITableView.RowAnimation = .automatic,
             indexPathTransform: (IndexPath) -> IndexPath = { $0 }
         ) {
             let update = BatchUpdate(diff: diff, indexPathTransform: indexPathTransform)
@@ -161,10 +161,10 @@
         public func animateRowAndSectionChanges<T: Collection>(
             oldData: T,
             newData: T,
-            rowDeletionAnimation: UITableViewRowAnimation = .automatic,
-            rowInsertionAnimation: UITableViewRowAnimation = .automatic,
-            sectionDeletionAnimation: UITableViewRowAnimation = .automatic,
-            sectionInsertionAnimation: UITableViewRowAnimation = .automatic,
+            rowDeletionAnimation: UITableView.RowAnimation = .automatic,
+            rowInsertionAnimation: UITableView.RowAnimation = .automatic,
+            sectionDeletionAnimation: UITableView.RowAnimation = .automatic,
+            sectionInsertionAnimation: UITableView.RowAnimation = .automatic,
             indexPathTransform: (IndexPath) -> IndexPath = { $0 },
             sectionTransform: (Int) -> Int = { $0 }
         )
@@ -198,10 +198,10 @@
             oldData: T,
             newData: T,
             isEqualElement: NestedElementEqualityChecker<T>,
-            rowDeletionAnimation: UITableViewRowAnimation = .automatic,
-            rowInsertionAnimation: UITableViewRowAnimation = .automatic,
-            sectionDeletionAnimation: UITableViewRowAnimation = .automatic,
-            sectionInsertionAnimation: UITableViewRowAnimation = .automatic,
+            rowDeletionAnimation: UITableView.RowAnimation = .automatic,
+            rowInsertionAnimation: UITableView.RowAnimation = .automatic,
+            sectionDeletionAnimation: UITableView.RowAnimation = .automatic,
+            sectionInsertionAnimation: UITableView.RowAnimation = .automatic,
             indexPathTransform: (IndexPath) -> IndexPath = { $0 },
             sectionTransform: (Int) -> Int = { $0 }
         )
@@ -237,10 +237,10 @@
             oldData: T,
             newData: T,
             isEqualSection: EqualityChecker<T>,
-            rowDeletionAnimation: UITableViewRowAnimation = .automatic,
-            rowInsertionAnimation: UITableViewRowAnimation = .automatic,
-            sectionDeletionAnimation: UITableViewRowAnimation = .automatic,
-            sectionInsertionAnimation: UITableViewRowAnimation = .automatic,
+            rowDeletionAnimation: UITableView.RowAnimation = .automatic,
+            rowInsertionAnimation: UITableView.RowAnimation = .automatic,
+            sectionDeletionAnimation: UITableView.RowAnimation = .automatic,
+            sectionInsertionAnimation: UITableView.RowAnimation = .automatic,
             indexPathTransform: (IndexPath) -> IndexPath = { $0 },
             sectionTransform: (Int) -> Int = { $0 }
         )
@@ -278,10 +278,10 @@
             newData: T,
             isEqualSection: EqualityChecker<T>,
             isEqualElement: NestedElementEqualityChecker<T>,
-            rowDeletionAnimation: UITableViewRowAnimation = .automatic,
-            rowInsertionAnimation: UITableViewRowAnimation = .automatic,
-            sectionDeletionAnimation: UITableViewRowAnimation = .automatic,
-            sectionInsertionAnimation: UITableViewRowAnimation = .automatic,
+            rowDeletionAnimation: UITableView.RowAnimation = .automatic,
+            rowInsertionAnimation: UITableView.RowAnimation = .automatic,
+            sectionDeletionAnimation: UITableView.RowAnimation = .automatic,
+            sectionInsertionAnimation: UITableView.RowAnimation = .automatic,
             indexPathTransform: (IndexPath) -> IndexPath = { $0 },
             sectionTransform: (Int) -> Int = { $0 }
         )
@@ -303,10 +303,10 @@
 
         public func apply(
             _ diff: NestedExtendedDiff,
-            rowDeletionAnimation: UITableViewRowAnimation = .automatic,
-            rowInsertionAnimation: UITableViewRowAnimation = .automatic,
-            sectionDeletionAnimation: UITableViewRowAnimation = .automatic,
-            sectionInsertionAnimation: UITableViewRowAnimation = .automatic,
+            rowDeletionAnimation: UITableView.RowAnimation = .automatic,
+            rowInsertionAnimation: UITableView.RowAnimation = .automatic,
+            sectionDeletionAnimation: UITableView.RowAnimation = .automatic,
+            sectionInsertionAnimation: UITableView.RowAnimation = .automatic,
             indexPathTransform: (IndexPath) -> IndexPath,
             sectionTransform: (Int) -> Int
         ) {
